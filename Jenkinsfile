@@ -55,7 +55,7 @@ pipeline {
 
         stage('Multi-Arch Image') {
             agent {
-                label "amd64&&docker"
+                label "docker"
             }
 
             when {
