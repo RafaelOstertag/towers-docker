@@ -24,4 +24,5 @@ COPY --from=executable /tmp/towers /home/towers
 WORKDIR /home/towers
 USER $USERID
 ENTRYPOINT ["/home/towers/towers"]
+CMD ["--help"]
 
