@@ -6,11 +6,10 @@ ARG REPOSITORY_PASSWORD
 WORKDIR /tmp
 RUN curl -Lf -u "${REPOSITORY_USER}:${REPOSITORY_PASSWORD}" -O https://rafaelostertag.jfrog.io/artifactory/maven-release/ch/guengel/towers/${VERSION}/towers-${VERSION}-jar-with-dependencies.jar
 
-FROM --platform=$BUILDPLATFORM ghcr.io/graalvm/graalvm-ce:21.3 AS executable
+FROM --platform=$BUILDPLATFORM ghcr.io/graalvm/native-image:22 AS executable
 ARG BUILDPLATFORM
 ARG VERSION
 WORKDIR /tmp
-RUN gu install native-image
 COPY --from=jar /tmp/towers-${VERSION}-jar-with-dependencies.jar towers.jar
 RUN native-image --verbose -jar towers.jar
 
